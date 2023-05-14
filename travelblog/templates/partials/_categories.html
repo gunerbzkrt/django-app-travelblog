@@ -1,0 +1,9 @@
+<div class="list-group list-group-flush">
+    {% for region in regions %}
+        {% if region.slug == selected_region %}
+            <a href="{% url 'post_by_region' region.slug %}" class="list-group-item list-group-item-action bg-success active">{{region.name|title}}</a>
+        {% else %}
+            <a href="{% url 'post_by_region' region.slug %}" class="list-group-item list-group-item-action">{{region.name|title}}</a>        
+        {% endif %}
+    {% endfor %}
+</div>

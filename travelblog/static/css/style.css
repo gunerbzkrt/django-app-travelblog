@@ -1,0 +1,18 @@
+.navbar-brand {
+    font-family: 'Lobster', cursive;
+    font-size: 50px; 
+    color: #004365;
+
+}
+
+.nav-item {
+    font-family: 'Lobster', cursive;
+    font-size: 30px; 
+
+}
+
+.list-group .list-group-item:hover {
+    background-color: #82CABB;
+    color: #ffffff;
+}
+

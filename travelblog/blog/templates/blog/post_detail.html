@@ -1,0 +1,90 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        src="{{post.image.url}}"
+        class="card-img-top rounded float-start"
+        style="object-fit: cover; height: 500px"
+        alt=""
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <article>
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">
+            <small class="text-muted">{{post.created_date}} </small>
+          </p>
+        </article>
+        <p class="card-text">{{post.text|safe}}</p>
+        <a
+          class="btn btn-success float-end"
+          href="{% url 'post_edit' post.id %}"
+          role="button"
+          >Edit</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<h2>Comments</h2>
+{% for comment in comments %}
+<div class="card mb-4">
+  <div class="card-body">
+    <p>{{ comment.text }}</p>
+
+    <div class="d-flex justify-content-between">
+      <div class="d-flex flex-row align-items-center">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+          alt="avatar"
+          width="25"
+          height="25"
+        />
+        <p class="small mb-0 ms-2">{{ comment.author }}</p>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <p class="small text-muted mb-0">{{ comment.created_at }}</p>
+        <i
+          class="far fa-thumbs-up mx-2 fa-xs text-black"
+          style="margin-top: -0.16rem"
+        ></i>
+        <p class="small text-muted mb-0">
+          <a href="{% url 'delete_comment' comment.id %}">Delete</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %} {% comment %}
+<h2>Add a comment</h2>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Add comment" />
+</form>
+{% endcomment %}
+
+<form method="post" class="form-horizontal">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="1" class="col-sm-2 control-label">
+      <strong>Author:</strong>
+    </label>
+    <div class="col-sm-10" id="1">{{ form.author }}</div>
+  </div>
+  <div class="form-group">
+    <label for="2" class="col-sm-2 control-label">
+      <strong> Comment:</strong>
+    </label>
+    <div class="col-sm-10" id="2">{{ form.text }}</div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" value="Add Comment" class="btn btn-primary" />
+    </div>
+  </div>
+</form>
+
+{% endblock content %}
